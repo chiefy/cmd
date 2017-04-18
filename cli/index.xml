@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clis on Cmd Documentation</title>
+    <link>https://www.cmd.io/cli/index.xml</link>
+    <description>Recent content in Clis on Cmd Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Jan 2017 18:00:00 -0600</lastBuildDate>
+    <atom:link href="https://www.cmd.io/cli/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Overview</title>
+      <link>https://www.cmd.io/cli/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/</guid>
+      <description>
+
+&lt;h2 id=&#34;using-the-cli-via-ssh&#34;&gt;Using the CLI via SSH&lt;/h2&gt;
+
+&lt;p&gt;There is no Cmd-specific client. Instead, you use an SSH client to interact with Cmd. Most of our documentation assumes OpenSSH, which is available on all Linux and MacOS systems.&lt;/p&gt;
+
+&lt;p&gt;Typically using Cmd via SSH looks like this in the terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh &amp;lt;username&amp;gt;@alpha.cmd.io &amp;lt;command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This can be shortened a number of ways. The most common is eliminating the need
+for specifying the username by setting it in your SSH configuration. You can also go so far as to create an alias:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ alias cmd=&amp;quot;ssh &amp;lt;username&amp;gt;@alpha.cmd.io&amp;quot;
+$ cmd &amp;lt;command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;builtin-commands&#34;&gt;Builtin Commands&lt;/h2&gt;
+
+&lt;p&gt;The point of Cmd is to run commands you create, but there are builtin
+commands to manage and configure your commands. These commands are prefixed with
+a colon.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./access&#34;&gt;:access&lt;/a&gt; &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Manage command access&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./admins&#34;&gt;:admins&lt;/a&gt; &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Manage command admins&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./create&#34;&gt;:create&lt;/a&gt; &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Create a command&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./delete&#34;&gt;:delete&lt;/a&gt; &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Delete a command&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./edit&#34;&gt;:edit&lt;/a&gt;     &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Edit a command&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./env&#34;&gt;:env&lt;/a&gt;       &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Manage command environment&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./ls&#34;&gt;:ls&lt;/a&gt;         &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; List available commands&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&#34;./tokens&#34;&gt;:tokens&lt;/a&gt; &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Manage access tokens&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;:help               &amp;nbsp;&lt;/td&gt;
+&lt;td&gt;&amp;nbsp; Help about any command&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>create</title>
+      <link>https://www.cmd.io/cli/create/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/create/</guid>
+      <description>
+
+&lt;h4 id=&#34;creates-a-new-command&#34;&gt;Creates a new command&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat ./script | ssh alpha.cmd.io :create &amp;lt;name&amp;gt; -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:create&lt;/code&gt; will build and add a new command to your namespace with the given
+&lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; using the script passed via STDIN. The &lt;code&gt;-&lt;/code&gt; argument is required to
+inform the command to read from STDIN, as future versions may introduce an
+interactive mode.&lt;/p&gt;
+
+&lt;h3 id=&#34;script-format&#34;&gt;Script format&lt;/h3&gt;
+
+&lt;p&gt;Cmd expects a shell script with at least two shebang lines. The first line
+must be a special &lt;code&gt;#!cmd&lt;/code&gt; line in this format:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd &amp;lt;base&amp;gt; [&amp;lt;package&amp;gt;...]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first argument &lt;code&gt;&amp;lt;base&amp;gt;&lt;/code&gt; is either &lt;code&gt;alpine&lt;/code&gt; or &lt;code&gt;ubuntu&lt;/code&gt;. The following optional
+arguments are packages available in their respective package repositories. Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd alpine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd alpine bash curl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd ubuntu git build-essential
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next line must be a regular shebang line, either defining an interpreter
+for the rest of the script, or the binary to run for the command. Examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd alpine bash
+#!/bin/bash
+echo &amp;quot;Hello world&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!cmd alpine terraform
+#!/usr/bin/terraform
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ls</title>
+      <link>https://www.cmd.io/cli/ls/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/ls/</guid>
+      <description>
+
+&lt;h4 id=&#34;lists-available-commands&#34;&gt;Lists available commands&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:ls&lt;/code&gt; will display a list of your commands.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>delete</title>
+      <link>https://www.cmd.io/cli/delete/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/delete/</guid>
+      <description>
+
+&lt;h4 id=&#34;deletes-a-command&#34;&gt;Deletes a command&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :delete &amp;lt;name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:delete&lt;/code&gt; will delete your command by the name given by &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>edit</title>
+      <link>https://www.cmd.io/cli/edit/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/edit/</guid>
+      <description>
+
+&lt;h4 id=&#34;edits-a-command&#34;&gt;Edits a command&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cat ./script | ssh alpha.cmd.io :edit &amp;lt;name&amp;gt; -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:edit&lt;/code&gt; will rebuild the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; with the script passed via STDIN.
+The builtin requires the &lt;code&gt;-&lt;/code&gt; second argument to inform it to read from
+STDIN, as future versions may introduce an interactive mode.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;../create&#34;&gt;:create&lt;/a&gt; for the expected script format.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>env</title>
+      <link>https://www.cmd.io/cli/env/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/env/</guid>
+      <description>
+
+&lt;h4 id=&#34;manages-command-environment&#34;&gt;Manages command environment&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :env &amp;lt;name&amp;gt; [&amp;lt;subcommand&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:env&lt;/code&gt; provides management of environment variables for your command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. The
+builtin has subcommands for setting and unsetting variables.&lt;/p&gt;
+
+&lt;p&gt;By default, if no subcommand is provided, it will list environment variables.&lt;/p&gt;
+
+&lt;h2 id=&#34;subcommands&#34;&gt;Subcommands&lt;/h2&gt;
+
+&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
+
+&lt;p&gt;Lists command environment variables&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :env &amp;lt;name&amp;gt; ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; subcommand will display environment variables configured for
+the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. This is the default subcommand to &lt;code&gt;:env&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;set&#34;&gt;set&lt;/h3&gt;
+
+&lt;p&gt;Sets an environment variable&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :env &amp;lt;name&amp;gt; set &amp;lt;key=value&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;set&lt;/code&gt; subcommand will set one or more variables for the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace. Variables are set with key value pairs like &lt;code&gt;FOO=bar&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;More than one variable can be set with extra arguments.&lt;/p&gt;
+
+&lt;h3 id=&#34;unset&#34;&gt;unset&lt;/h3&gt;
+
+&lt;p&gt;Unsets an environment variable&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :env &amp;lt;name&amp;gt; unset &amp;lt;key&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;unset&lt;/code&gt; subcommand will delete one or more environment variables for the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace.&lt;/p&gt;
+
+&lt;p&gt;More than one variable key can be provided as extra arguments.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>access</title>
+      <link>https://www.cmd.io/cli/access/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/access/</guid>
+      <description>
+
+&lt;h4 id=&#34;manages-command-access&#34;&gt;Manages command access&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :access &amp;lt;name&amp;gt; [&amp;lt;subcommand&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:access&lt;/code&gt; provides management of who else can run your command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. The
+builtin has subcommands for granting and revoking access to users or access tokens.&lt;/p&gt;
+
+&lt;p&gt;By default, if no subcommand is provided, it will list command access.&lt;/p&gt;
+
+&lt;h2 id=&#34;subcommands&#34;&gt;Subcommands&lt;/h2&gt;
+
+&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
+
+&lt;p&gt;Lists command access&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :access &amp;lt;name&amp;gt; ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; subcommand will display what users and access tokens have access to
+run the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. This is the default subcommand to &lt;code&gt;:access&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;grant&#34;&gt;grant&lt;/h3&gt;
+
+&lt;p&gt;Grants command access to a subject&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :access &amp;lt;name&amp;gt; grant &amp;lt;subject&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;grant&lt;/code&gt; subcommand will allow a subject, either a username or access token,
+to run the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace. The command will be configured with the same environment, but they will not have the ability to view or change environment
+or access to the command. For this, see &lt;a href=&#34;../admins&#34;&gt;:admins&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;More than one subject can be provided as extra arguments.&lt;/p&gt;
+
+&lt;h3 id=&#34;revoke&#34;&gt;revoke&lt;/h3&gt;
+
+&lt;p&gt;Revokes command access from a subject&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :access &amp;lt;name&amp;gt; revoke &amp;lt;subject&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;revoke&lt;/code&gt; subcommand will revoke access from subject, either a username or access token, to run the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace.&lt;/p&gt;
+
+&lt;p&gt;More than one subject can be provided as extra arguments.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>admins</title>
+      <link>https://www.cmd.io/cli/admins/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/admins/</guid>
+      <description>
+
+&lt;h4 id=&#34;manages-command-admins&#34;&gt;Manages command admins&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :admins &amp;lt;name&amp;gt; [&amp;lt;subcommand&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:admins&lt;/code&gt; provides management of who else can manage your command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. The
+builtin has subcommands for granting and revoking command admin to users.&lt;/p&gt;
+
+&lt;p&gt;Admins have the ability to view and change environment and access, and edit a
+command script.&lt;/p&gt;
+
+&lt;p&gt;By default, if no subcommand is provided, it will list command admins.&lt;/p&gt;
+
+&lt;h2 id=&#34;subcommands&#34;&gt;Subcommands&lt;/h2&gt;
+
+&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
+
+&lt;p&gt;Lists command admins&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :admins &amp;lt;name&amp;gt; ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; subcommand will display what users have admin access to
+the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt;. This is the default subcommand to &lt;code&gt;:admins&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;grant&#34;&gt;grant&lt;/h3&gt;
+
+&lt;p&gt;Grants command admin to a user&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :admins &amp;lt;name&amp;gt; grant &amp;lt;user&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;grant&lt;/code&gt; subcommand will allow a user to manage the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace.&lt;/p&gt;
+
+&lt;p&gt;More than one user can be provided as extra arguments.&lt;/p&gt;
+
+&lt;h3 id=&#34;revoke&#34;&gt;revoke&lt;/h3&gt;
+
+&lt;p&gt;Revokes command admin from a user&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :admins &amp;lt;name&amp;gt; revoke &amp;lt;user&amp;gt;...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;revoke&lt;/code&gt; subcommand will revoke admin privilege from a user for the command &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; in your namespace.&lt;/p&gt;
+
+&lt;p&gt;More than one user can be provided as extra arguments.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>tokens</title>
+      <link>https://www.cmd.io/cli/tokens/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/cli/tokens/</guid>
+      <description>
+
+&lt;h4 id=&#34;manages-access-tokens&#34;&gt;Manages access tokens&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :tokens [&amp;lt;subcommand&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;:tokens&lt;/code&gt; provides management of access tokens that can be used to provide access to apps and users without a user account. The
+builtin has subcommands for creating and deleting tokens.&lt;/p&gt;
+
+&lt;p&gt;By default, if no subcommand is provided, it will list access tokens.&lt;/p&gt;
+
+&lt;h2 id=&#34;subcommands&#34;&gt;Subcommands&lt;/h2&gt;
+
+&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;
+
+&lt;p&gt;Lists access tokens&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :tokens ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;ls&lt;/code&gt; subcommand will display existing access tokens. This is the default subcommand to &lt;code&gt;:tokens&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;new&#34;&gt;new&lt;/h3&gt;
+
+&lt;p&gt;Creates a new access token&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :tokens new
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;new&lt;/code&gt; subcommand will create and display a new access token that can be used
+with &lt;a href=&#34;../access&#34;&gt;:access&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;rm&#34;&gt;rm&lt;/h3&gt;
+
+&lt;p&gt;Deletes an access token&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh alpha.cmd.io :tokens rm &amp;lt;token&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;rm&lt;/code&gt; subcommand will revoke all access for and delete the token &lt;code&gt;&amp;lt;token&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>tokens &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+<h3>Navigation:</h3>
+<ul>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/">Overview</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/create/">create</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/ls/">ls</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/delete/">delete</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/edit/">edit</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/env/">env</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/access/">access</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/admins/">admins</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/tokens/">tokens</a>
+	</li>
+	
+</ul>
+
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>tokens</h1>
+	
+	
+
+<h4 id="manages-access-tokens">Manages access tokens</h4>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :tokens [&lt;subcommand&gt;]
+</code></pre>
+
+<p><code>:tokens</code> provides management of access tokens that can be used to provide access to apps and users without a user account. The
+builtin has subcommands for creating and deleting tokens.</p>
+
+<p>By default, if no subcommand is provided, it will list access tokens.</p>
+
+<h2 id="subcommands">Subcommands</h2>
+
+<h3 id="ls">ls</h3>
+
+<p>Lists access tokens</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :tokens ls
+</code></pre>
+
+<p>The <code>ls</code> subcommand will display existing access tokens. This is the default subcommand to <code>:tokens</code>.</p>
+
+<h3 id="new">new</h3>
+
+<p>Creates a new access token</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :tokens new
+</code></pre>
+
+<p>The <code>new</code> subcommand will create and display a new access token that can be used
+with <a href="../access">:access</a>.</p>
+
+<h3 id="rm">rm</h3>
+
+<p>Deletes an access token</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :tokens rm &lt;token&gt;
+</code></pre>
+
+<p>The <code>rm</code> subcommand will revoke all access for and delete the token <code>&lt;token&gt;</code>.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Advanced &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Advanced</h1>
+	
+	
+
+<h2 id="handling-git-push">Handling <code>git push</code></h2>
+
+<p>There are a number of patterns and recipes to cover elsewhere in this wiki, but
+I&rsquo;m going to share this one here. You can use Cmd.io commands over SSH as Git
+remote endpoints to implement and react to <code>git push</code> from your repositories.
+Specifically, you can use one command for Git remotes: <code>git-receive-pack</code>.</p>
+
+<p>You see, all that happens when you <code>git push</code> to an SSH remote like
+<code>git@github.com:gliderlabs/cmd.git</code> is it translates to the SSH command <code>ssh
+git@github.com git-receive-pack 'gliderlabs/cmd.git'</code>. This opens a session to
+<code>github.com</code> and runs the command <code>git-receive-pack</code> with the repo path
+argument. The actual <code>git-receive-pack</code> command then reads packed Git data over
+STDIN and applies it to the bare repository on the filesystem that was provided
+as an argument.</p>
+
+<p>What Heroku and later <a href="https://github.com/progrium/gitreceive">gitreceive</a>,
+Dokku, Flynn, etc all do in some form effectively is wrap <code>git-receive-pack</code> and
+install a pre-receive hook into the repository (perhaps created on the fly) that
+does some task. Git is designed to display the output of that hook back to the
+user during the push, so from that hook script you can <code>git archive</code> to get a
+tar of what was pushed and do whatever you want with it.</p>
+
+<p>Currently, you can do this with Cmd.io by creating a command named
+<code>git-receive-pack</code>, which will handle all Git pushes to Cmd.io that authenticate
+with your username. Cmd.io is doing nothing special to make this work, but now
+you need a command that will properly handle the push.</p>
+
+<p>Here&rsquo;s an example to get you started. It involves three files: <code>Dockerfile</code>,
+<code>git-receive</code>, and <code>pre-receive</code>. Remember the last two need to have <code>chmod +x</code>
+run on them.</p>
+
+<h4 id="dockerfile">Dockerfile</h4>
+
+<pre><code>FROM alpine:3.4
+RUN apk add --update --no-cache git sed bash
+COPY ./git-receive /bin/git-receive
+COPY ./pre-receive /hooks/
+ENTRYPOINT [&quot;/bin/git-receive&quot;]
+</code></pre>
+
+<p>Note that anything your <code>pre-receive</code> script is going to use also needs to be
+installed in this Dockerfile.</p>
+
+<h4 id="git-receive">git-receive</h4>
+
+<pre><code>#!/bin/bash
+repo=&quot;$1&quot;
+if [[ &quot;$repo&quot; != /* ]]; then
+  repo=&quot;/$repo&quot;
+fi
+git init --quiet --bare &quot;$repo&quot;
+cp /hooks/pre-receive $repo/hooks
+git-shell -c &quot;git-receive-pack '$repo'&quot;
+</code></pre>
+
+<p>This normalizes the repository argument, creates a bare repo in that location,
+installs <code>pre-receive</code> as a hook for that repository, and performs the actual
+<code>git-receive-pack</code>. This will then trigger <code>pre-receive</code>.</p>
+
+<h4 id="pre-receive">pre-receive</h4>
+
+<pre><code>#!/bin/bash
+
+main() {
+  # reads git push header data into variables
+  read old new ref
+
+  # use archive to tarpipe pushed branch files to a working directory
+  git archive &quot;$new&quot; | (cd /tmp &amp;&amp; tar -xpf -)
+
+  # go to that directory
+  cd /tmp
+
+  # do something with the files!
+  # exit non-zero and the push will fail.
+}
+
+delete-remote-prefix() {
+  # this removes &quot;remote: &quot; that git prefixes hook output with client side
+  sed -u &quot;s/^/&quot;$'\e[1G'&quot;/&quot;
+}
+
+main | delete-remote-prefix
+</code></pre>
+
+<p>This is just a template but from here you could deploy, do builds, run checks,
+or something more creative.</p>
+
+<h4 id="git-remote">git remote</h4>
+
+<p>Once you&rsquo;ve made a command from the above and installed it as
+<code>git-receive-pack</code>, you can add a remote to the repositories you want to push
+from like this:</p>
+
+<pre><code>$ git remote add cmd ssh://progrium@cmd.io/repo/path
+</code></pre>
+
+<p>The name of the remote can be anything you like, here it&rsquo;s <code>cmd</code>. You can also
+drop the username if you were previously. The repo path can be anything as well,
+perhaps use it to determine what to do in your pre-receive script.</p>
+
+<p>Unfortunately, <code>git-receive-pack</code> is not sharable. Perhaps in the near future
+there will be more integrated support in Cmd.io for this pattern.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>create &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+<h3>Navigation:</h3>
+<ul>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/">Overview</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/create/">create</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/ls/">ls</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/delete/">delete</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/edit/">edit</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/env/">env</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/access/">access</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/admins/">admins</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/tokens/">tokens</a>
+	</li>
+	
+</ul>
+
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>create</h1>
+	
+	
+
+<h4 id="creates-a-new-command">Creates a new command</h4>
+
+<pre><code class="language-sh">$ cat ./script | ssh alpha.cmd.io :create &lt;name&gt; -
+</code></pre>
+
+<p><code>:create</code> will build and add a new command to your namespace with the given
+<code>&lt;name&gt;</code> using the script passed via STDIN. The <code>-</code> argument is required to
+inform the command to read from STDIN, as future versions may introduce an
+interactive mode.</p>
+
+<h3 id="script-format">Script format</h3>
+
+<p>Cmd expects a shell script with at least two shebang lines. The first line
+must be a special <code>#!cmd</code> line in this format:</p>
+
+<pre><code class="language-text">#!cmd &lt;base&gt; [&lt;package&gt;...]
+</code></pre>
+
+<p>The first argument <code>&lt;base&gt;</code> is either <code>alpine</code> or <code>ubuntu</code>. The following optional
+arguments are packages available in their respective package repositories. Examples:</p>
+
+<pre><code class="language-text">#!cmd alpine
+</code></pre>
+
+<pre><code class="language-text">#!cmd alpine bash curl
+</code></pre>
+
+<pre><code class="language-text">#!cmd ubuntu git build-essential
+</code></pre>
+
+<p>The next line must be a regular shebang line, either defining an interpreter
+for the rest of the script, or the binary to run for the command. Examples:</p>
+
+<pre><code class="language-text">#!cmd alpine bash
+#!/bin/bash
+echo &quot;Hello world&quot;
+</code></pre>
+
+<pre><code class="language-text">#!cmd alpine terraform
+#!/usr/bin/terraform
+</code></pre>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

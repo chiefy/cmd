@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Authoring Commands &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Authoring Commands</h1>
+	
+	
+
+<p>You&rsquo;ll probably be using your own commands more than off-the-shelf commands.
+Right now, since Docker Hub is the only source for commands, making and
+publishing commands is as easy as any Docker container. After you&rsquo;ve gone
+through this once, you might be surprised at how quickly you can make and update
+Cmd.io commands. It&rsquo;s literally build, push, use.</p>
+
+<p>Up to this point, we haven&rsquo;t needed to use or install Docker. For the time
+being, you&rsquo;ll need Docker to make Cmd.io commands. We highly recommend <a href="https://docs.docker.com/docker-for-mac/">Docker
+for Mac</a> if you&rsquo;re running macOS.</p>
+
+<p>You&rsquo;ll also need a <a href="https://hub.docker.com/">Docker Hub</a> account and be sure to
+login with Docker (<code>docker login</code>).</p>
+
+<h3 id="commands-based-on-existing-utilities">Commands based on existing utilities</h3>
+
+<p>The recommended way to build commands from existing open source utilities is to
+install them via a package manager. To keep your experience snappy, and since
+Cmd.io may enforce a size limit on images, we highly encourage you to use Alpine
+Linux for all command containers.</p>
+
+<p>Alpine combines the small size of Busybox  (~5MB) with a large package index
+optimized for small disk footprints. You can search for packages <a href="http://pkgs.alpinelinux.org/packages">based on
+name</a> or <a href="http://pkgs.alpinelinux.org/contents">based on
+contents</a>. If you can&rsquo;t find a package for
+a utility, you can try using <code>ubuntu-debootstrap</code>, which is a minimal Ubuntu
+image with <code>apt-get</code>. However it starts at ~90MB and easily bloats from there.</p>
+
+<p><a href="http://pkgs.alpinelinux.org/package/v3.4/main/x86_64/jq">Here is jq</a> for Alpine
+v3.4, so we can make a container for it with a simple Dockerfile that uses the
+<code>apk</code> package tool:</p>
+
+<pre><code>FROM alpine:3.4
+RUN apk add --update --no-cache jq
+ENTRYPOINT [&quot;/usr/bin/jq&quot;]
+</code></pre>
+
+<p>The directives used in this example are nearly all that make sense to use for
+Cmd.io commands, but here is the full <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile
+reference</a>.</p>
+
+<p>Now we can build this with Docker, assuming we&rsquo;re in the directory with the
+Dockerfile. Immediately after building, we can push to Docker Hub. Replace
+<code>progrium</code> with your Docker ID.</p>
+
+<pre><code>$ docker build -t progrium/jq .
+...
+$ docker push progrium/jq
+...
+</code></pre>
+
+<p>At this point you can now install this command on Cmd.io like before. If you
+push new versions of the image to Docker Hub, Cmd.io will pull it just before
+the next run.</p>
+
+<h3 id="commands-based-on-scripts">Commands based on scripts</h3>
+
+<p>Making a container for a script is not that different from making it for an
+existing utility. You&rsquo;ll want to install the interpreter and any other utilities
+the script depends on the same way as before. But you&rsquo;ll also be adding your
+script and making it the entrypoint.</p>
+
+<p>Create a file called <code>netpoll</code> and make sure it&rsquo;s executable with <code>chmod +x
+netpoll</code>. Inside it, put this Bash script that uses netcat to poll an address
+and port for roughly 10 seconds or until the port accepts a connection. If it
+connects it returns. If it times out it returns non-zero. A rather handy little
+script.</p>
+
+<pre><code>#!/bin/bash
+for retry in $(seq 1 ${TIMEOUT:-10}); do
+  nc -z -w 1 &quot;$1&quot; &quot;$2&quot; &amp;&amp; break
+done
+</code></pre>
+
+<p>In the same directory create a <code>Dockerfile</code> like this:</p>
+
+<pre><code>FROM alpine:3.4
+RUN apk add --update bash netcat-openbsd
+COPY ./netpoll /bin/netpoll
+ENTRYPOINT [&quot;/bin/netpoll&quot;]
+</code></pre>
+
+<p>Build, push, and install with Cmd.io. Let&rsquo;s say I installed it as <code>netpoll</code>. I
+can run it against <code>cmd.io</code> port <code>22</code> and it returns immediately with status 0.
+Run against <code>cmd.io</code> port <code>23</code> and it blocks for at least 10 seconds before
+giving up and returning status 1.</p>
+
+<pre><code>$ ssh alpha.cmd.io netpoll cmd.io 22; echo $?
+0
+$ ssh alpha.cmd.io netpoll cmd.io 23; echo $?
+1
+</code></pre>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

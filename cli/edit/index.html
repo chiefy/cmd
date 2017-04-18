@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>edit &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+<h3>Navigation:</h3>
+<ul>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/">Overview</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/create/">create</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/ls/">ls</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/delete/">delete</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/edit/">edit</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/env/">env</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/access/">access</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/admins/">admins</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/tokens/">tokens</a>
+	</li>
+	
+</ul>
+
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>edit</h1>
+	
+	
+
+<h4 id="edits-a-command">Edits a command</h4>
+
+<pre><code class="language-sh">$ cat ./script | ssh alpha.cmd.io :edit &lt;name&gt; -
+</code></pre>
+
+<p><code>:edit</code> will rebuild the command <code>&lt;name&gt;</code> with the script passed via STDIN.
+The builtin requires the <code>-</code> second argument to inform it to read from
+STDIN, as future versions may introduce an interactive mode.</p>
+
+<p>See <a href="../create">:create</a> for the expected script format.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

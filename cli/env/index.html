@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>env &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+<h3>Navigation:</h3>
+<ul>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/">Overview</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/create/">create</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/ls/">ls</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/delete/">delete</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/edit/">edit</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/env/">env</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/access/">access</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/admins/">admins</a>
+	</li>
+	
+	<li class="toctree-l1">
+		<a class="reference internal" href="https://www.cmd.io/cli/tokens/">tokens</a>
+	</li>
+	
+</ul>
+
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>env</h1>
+	
+	
+
+<h4 id="manages-command-environment">Manages command environment</h4>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :env &lt;name&gt; [&lt;subcommand&gt;]
+</code></pre>
+
+<p><code>:env</code> provides management of environment variables for your command <code>&lt;name&gt;</code>. The
+builtin has subcommands for setting and unsetting variables.</p>
+
+<p>By default, if no subcommand is provided, it will list environment variables.</p>
+
+<h2 id="subcommands">Subcommands</h2>
+
+<h3 id="ls">ls</h3>
+
+<p>Lists command environment variables</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :env &lt;name&gt; ls
+</code></pre>
+
+<p>The <code>ls</code> subcommand will display environment variables configured for
+the command <code>&lt;name&gt;</code>. This is the default subcommand to <code>:env</code>.</p>
+
+<h3 id="set">set</h3>
+
+<p>Sets an environment variable</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :env &lt;name&gt; set &lt;key=value&gt;...
+</code></pre>
+
+<p>The <code>set</code> subcommand will set one or more variables for the command <code>&lt;name&gt;</code> in your namespace. Variables are set with key value pairs like <code>FOO=bar</code>.</p>
+
+<p>More than one variable can be set with extra arguments.</p>
+
+<h3 id="unset">unset</h3>
+
+<p>Unsets an environment variable</p>
+
+<pre><code class="language-sh">$ ssh alpha.cmd.io :env &lt;name&gt; unset &lt;key&gt;...
+</code></pre>
+
+<p>The <code>unset</code> subcommand will delete one or more environment variables for the command <code>&lt;name&gt;</code> in your namespace.</p>
+
+<p>More than one variable key can be provided as extra arguments.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

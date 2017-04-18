@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guides on Cmd Documentation</title>
+    <link>https://www.cmd.io/guide/index.xml</link>
+    <description>Recent content in Guides on Cmd Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 31 Jan 2017 18:00:00 -0600</lastBuildDate>
+    <atom:link href="https://www.cmd.io/guide/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cmd.io Documentation</title>
+      <link>https://www.cmd.io/guide/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/</guid>
+      <description>
+
+&lt;h2 id=&#34;just-a-placeholder&#34;&gt;Just a placeholder&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Roges enim Aristonem, bonane ei videantur haec: vacuitas doloris, divitiae, valitudo; Quodsi ipsam honestatem undique pertectam atque absolutam. Ad corpus diceres pertinere-, sed ea, quae dixi, ad corpusne refers? Duo Reges: constructio interrete. Illum mallem levares, quo optimum atque humanissimum virum, Cn. Inscite autem medicinae et gubernationis ultimum cum ultimo sapientiae comparatur. Hi curatione adhibita levantur in dies, valet alter plus cotidie, alter videt. Videmusne ut pueri ne verberibus quidem a contemplandis rebus perquirendisque deterreantur? Si enim ad populum me vocas, eum. Quare hoc videndum est, possitne nobis hoc ratio philosophorum dare. Quorum sine causa fieri nihil putandum est. Fortasse id optimum, sed ubi illud: Plus semper voluptatis?&lt;/p&gt;
+
+&lt;h2 id=&#34;quick-start&#34;&gt;Quick start&lt;/h2&gt;
+
+&lt;p&gt;Install with &lt;code&gt;git&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git clone bone
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Callipho ad virtutem nihil adiunxit nisi voluptatem, Diodorus vacuitatem doloris.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ita multo sanguine profuso in laetitia et in victoria est mortuus.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ita fit cum gravior, tum etiam splendidior oratio. Quamquam tu hanc copiosiorem etiam soles dicere.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Huius, Lyco, oratione locuples, rebus ipsis ielunior.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;acknowledgements&#34;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;p&gt;Ergo instituto veterum, quo etiam Stoici utuntur, hinc capiamus exordium. Quam si explicavisset, non tam haesitaret. Itaque hic ipse iam pridem est reiectus; Roges enim Aristonem, bonane ei videantur haec: vacuitas doloris, divitiae, valitudo; Si verbum sequimur, primum longius verbum praepositum quam bonum. Verum hoc idem saepe faciamus.&lt;/p&gt;
+
+&lt;p&gt;Videsne, ut haec concinant? Num quid tale Democritus? Nec vero alia sunt quaerenda contra Carneadeam illam sententiam. Ergo illi intellegunt quid Epicurus dicat, ego non intellego?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>https://www.cmd.io/guide/overview/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/overview/</guid>
+      <description>&lt;p&gt;Cmd.io is a service that remotely runs commands and scripts. The primary
+interface to Cmd.io is SSH, meaning you can use Cmd.io commands from any host
+with an SSH client. A couple of use cases for Cmd.io include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CLI utilities as a service.&lt;/strong&gt; Example, bring &lt;code&gt;jq&lt;/code&gt; wherever you go, without installing it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Avoid installing big CLI programs.&lt;/strong&gt; Example, &lt;code&gt;latex&lt;/code&gt; is huge and difficult to build but used infrequently.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scripts you can use from anywhere.&lt;/strong&gt; Trigger and orchestrate other systems using any language.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Share and control access to automation.&lt;/strong&gt; Build tools for your team or Rickroll your friends.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cmd.io commands can run any x86 64-bit program in an Linux Docker container.
+However, it&amp;rsquo;s designed for commands and scripts as opposed to long-running
+daemons. In fact, commands can only run for a limited time before they timeout.
+So Cmd.io is also not suitable for replacing your shell. Kudos for such a clever
+idea, though.&lt;/p&gt;
+
+&lt;p&gt;Commands are unable to listen on routable ports, which is not common with most
+commands anyway. In the rare cases you need to, such as debugging with netcat,
+consider using a tool like &lt;a href=&#34;https://ngrok.com/&#34;&gt;ngrok&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another important constraint of commands is that they are stateless. Besides
+configured environment variables, nothing persists across command runs. If the
+command makes a file, it will not be there the next time you run it. Utilities
+that expect files on the filesystem will need to be wrapped so they can receive
+the file(s) via STDIN.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Setup</title>
+      <link>https://www.cmd.io/guide/setup/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/setup/</guid>
+      <description>
+
+&lt;h2 id=&#34;user-notes&#34;&gt;User Notes&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;d love it if you took notes about your experience getting started and then
+using Cmd.io. You can then share on
+&lt;a href=&#34;https://github.com/gliderlabs/cmd/wiki/UserNotes&#34;&gt;UserNotes&lt;/a&gt; and we can use
+them as living documents to improve the experience. Also, if something is wrong
+on this page or any other, feel free to edit this wiki!&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This document is currently for the alpha release channel (alpha.cmd.io) &amp;hellip;
+any accidental references to the cmd.io domain should be read as alpha.cmd.io&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Cmd.io uses your GitHub user for authentication. It also relies on the public
+keys stored with your GitHub account. If you haven&amp;rsquo;t uploaded a public key to
+GitHub, you can easily add one in Settings under &lt;a href=&#34;https://github.com/settings/keys&#34;&gt;SSH and GPG
+keys&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can connect to Cmd.io over SSH:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh progrium@alpha.cmd.io
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io [command]
+
+Available Commands:
+  cmd-add             Install a command
+  cmd-ls              List installed commands
+  cmd-rm              Uninstall a command
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you&amp;rsquo;re using a local user with the same username as your GitHub username, SSH
+will use it by default. If not, you can also avoid specifying a username with
+some configuration added to your &lt;code&gt;~/.ssh/config&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host alpha.cmd.io
+    User progrium
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Builtin Commands</title>
+      <link>https://www.cmd.io/guide/builtins/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/builtins/</guid>
+      <description>
+
+&lt;p&gt;Cmd.io is about running and managing user commands. Builtin commands let us add and
+remove user commands. They&amp;rsquo;re prefixed with &lt;code&gt;cmd-&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh progrium@alpha.cmd.io
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io [command]
+
+Available Commands:
+  cmd-add             Install a command
+  cmd-ls              List installed commands
+  cmd-rm              Uninstall a command
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-a-command&#34;&gt;Installing a command&lt;/h2&gt;
+
+&lt;p&gt;We can install a command with &lt;code&gt;cmd-add&lt;/code&gt;. We can see how with &lt;code&gt;--help&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-add --help
+Install a command
+
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io cmd-add &amp;lt;name&amp;gt; &amp;lt;source&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Although this help could be more helpful, it does at least tell us the arguments
+to &lt;code&gt;cmd-add&lt;/code&gt;. The first, &lt;code&gt;name&lt;/code&gt;, is a name you choose for the command. The
+second, &lt;code&gt;source&lt;/code&gt;, is where to get the command. Right now, the only supported
+sources are public Docker registries like Docker Hub. Let&amp;rsquo;s use this mysterious
+Docker image, &lt;a href=&#34;https://hub.docker.com/r/progrium/welcome/&#34;&gt;progrium/welcome&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-add demo progrium/welcome
+Command installed
+$ ssh alpha.cmd.io
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io [command]
+
+Available Commands:
+  cmd-add             Install a command
+  cmd-ls              List installed commands
+  cmd-rm              Uninstall a command
+  demo
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Although it lacks a description, the command &lt;code&gt;demo&lt;/code&gt; is now available. Run it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io demo
+
+Hello! This is a cmd.io command. All it does is display this message.
+However, cmd.io commands can do lots more. They can pretty much do
+anything you can do in a Docker container, except for long-running
+processes like daemons.
+
+You can install cmd.io commands from a number of sources, including
+anything off Docker Hub. Once you have a command installed, you can
+configure it and share access to it. Anybody that has access to your
+command can run it from anywhere they have an SSH client.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ignoring the fact this message is lying to you (Docker Hub is currently the
+&lt;em&gt;only&lt;/em&gt; source for commands), you&amp;rsquo;ve run your first Cmd.io command!&lt;/p&gt;
+
+&lt;p&gt;The container images you install don&amp;rsquo;t need to be specific to Cmd.io. Pretty
+much any CLI tool in a container can be installed. Here&amp;rsquo;s a
+&lt;a href=&#34;https://hub.docker.com/r/gophernet/netcat/&#34;&gt;netcat&lt;/a&gt; container we can use to
+show that &lt;code&gt;cmd.io&lt;/code&gt; port &lt;code&gt;22&lt;/code&gt; is open:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-add nc gophernet/netcat
+Command installed
+$ ssh alpha.cmd.io nc -z -v cmd.io 22
+cmd.io (159.203.159.60:22) open
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;removing-commands&#34;&gt;Removing commands&lt;/h2&gt;
+
+&lt;p&gt;This is pretty straightforward:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-rm nc
+Command uninstalled
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Authoring Commands</title>
+      <link>https://www.cmd.io/guide/authoring/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/authoring/</guid>
+      <description>
+
+&lt;p&gt;You&amp;rsquo;ll probably be using your own commands more than off-the-shelf commands.
+Right now, since Docker Hub is the only source for commands, making and
+publishing commands is as easy as any Docker container. After you&amp;rsquo;ve gone
+through this once, you might be surprised at how quickly you can make and update
+Cmd.io commands. It&amp;rsquo;s literally build, push, use.&lt;/p&gt;
+
+&lt;p&gt;Up to this point, we haven&amp;rsquo;t needed to use or install Docker. For the time
+being, you&amp;rsquo;ll need Docker to make Cmd.io commands. We highly recommend &lt;a href=&#34;https://docs.docker.com/docker-for-mac/&#34;&gt;Docker
+for Mac&lt;/a&gt; if you&amp;rsquo;re running macOS.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll also need a &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Docker Hub&lt;/a&gt; account and be sure to
+login with Docker (&lt;code&gt;docker login&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;commands-based-on-existing-utilities&#34;&gt;Commands based on existing utilities&lt;/h3&gt;
+
+&lt;p&gt;The recommended way to build commands from existing open source utilities is to
+install them via a package manager. To keep your experience snappy, and since
+Cmd.io may enforce a size limit on images, we highly encourage you to use Alpine
+Linux for all command containers.&lt;/p&gt;
+
+&lt;p&gt;Alpine combines the small size of Busybox  (~5MB) with a large package index
+optimized for small disk footprints. You can search for packages &lt;a href=&#34;http://pkgs.alpinelinux.org/packages&#34;&gt;based on
+name&lt;/a&gt; or &lt;a href=&#34;http://pkgs.alpinelinux.org/contents&#34;&gt;based on
+contents&lt;/a&gt;. If you can&amp;rsquo;t find a package for
+a utility, you can try using &lt;code&gt;ubuntu-debootstrap&lt;/code&gt;, which is a minimal Ubuntu
+image with &lt;code&gt;apt-get&lt;/code&gt;. However it starts at ~90MB and easily bloats from there.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://pkgs.alpinelinux.org/package/v3.4/main/x86_64/jq&#34;&gt;Here is jq&lt;/a&gt; for Alpine
+v3.4, so we can make a container for it with a simple Dockerfile that uses the
+&lt;code&gt;apk&lt;/code&gt; package tool:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM alpine:3.4
+RUN apk add --update --no-cache jq
+ENTRYPOINT [&amp;quot;/usr/bin/jq&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The directives used in this example are nearly all that make sense to use for
+Cmd.io commands, but here is the full &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/&#34;&gt;Dockerfile
+reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we can build this with Docker, assuming we&amp;rsquo;re in the directory with the
+Dockerfile. Immediately after building, we can push to Docker Hub. Replace
+&lt;code&gt;progrium&lt;/code&gt; with your Docker ID.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t progrium/jq .
+...
+$ docker push progrium/jq
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point you can now install this command on Cmd.io like before. If you
+push new versions of the image to Docker Hub, Cmd.io will pull it just before
+the next run.&lt;/p&gt;
+
+&lt;h3 id=&#34;commands-based-on-scripts&#34;&gt;Commands based on scripts&lt;/h3&gt;
+
+&lt;p&gt;Making a container for a script is not that different from making it for an
+existing utility. You&amp;rsquo;ll want to install the interpreter and any other utilities
+the script depends on the same way as before. But you&amp;rsquo;ll also be adding your
+script and making it the entrypoint.&lt;/p&gt;
+
+&lt;p&gt;Create a file called &lt;code&gt;netpoll&lt;/code&gt; and make sure it&amp;rsquo;s executable with &lt;code&gt;chmod +x
+netpoll&lt;/code&gt;. Inside it, put this Bash script that uses netcat to poll an address
+and port for roughly 10 seconds or until the port accepts a connection. If it
+connects it returns. If it times out it returns non-zero. A rather handy little
+script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+for retry in $(seq 1 ${TIMEOUT:-10}); do
+  nc -z -w 1 &amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot; &amp;amp;&amp;amp; break
+done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the same directory create a &lt;code&gt;Dockerfile&lt;/code&gt; like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM alpine:3.4
+RUN apk add --update bash netcat-openbsd
+COPY ./netpoll /bin/netpoll
+ENTRYPOINT [&amp;quot;/bin/netpoll&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Build, push, and install with Cmd.io. Let&amp;rsquo;s say I installed it as &lt;code&gt;netpoll&lt;/code&gt;. I
+can run it against &lt;code&gt;cmd.io&lt;/code&gt; port &lt;code&gt;22&lt;/code&gt; and it returns immediately with status 0.
+Run against &lt;code&gt;cmd.io&lt;/code&gt; port &lt;code&gt;23&lt;/code&gt; and it blocks for at least 10 seconds before
+giving up and returning status 1.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io netpoll cmd.io 22; echo $?
+0
+$ ssh alpha.cmd.io netpoll cmd.io 23; echo $?
+1
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Meta Commands</title>
+      <link>https://www.cmd.io/guide/meta/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/meta/</guid>
+      <description>
+
+&lt;p&gt;Some of the real power in Cmd.io comes from what you can do with meta commands.
+Meta command are commands that operate on a command. They look like
+&lt;code&gt;&amp;lt;command&amp;gt;:&amp;lt;metacommand&amp;gt;&lt;/code&gt;. Let&amp;rsquo;s use the &lt;code&gt;:help&lt;/code&gt; meta command on our &lt;code&gt;netpoll&lt;/code&gt;
+command from before to see what we can do:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io netpoll:help
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io netpoll:[command]
+
+Available Commands:
+  :access     Manage command access
+  :admins     Manage command admins
+  :env        Manage command environment
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can explore &lt;code&gt;:access&lt;/code&gt; and &lt;code&gt;:admins&lt;/code&gt; on your own. In short, access lets you
+share a command with others by adding and removing GitHub usernames. They can
+run it prefixed with your username and a slash. For example, if I shared
+&lt;code&gt;netpoll&lt;/code&gt; with you, you could run it with &lt;code&gt;ssh cmd.io progrium/netpoll&lt;/code&gt;. Access
+also lets you make a command public, letting any user run it, or make it private
+again.&lt;/p&gt;
+
+&lt;p&gt;The difference between access and admins is currently that admins have access to
+these meta commands just like you. Users with access don&amp;rsquo;t. A useful dynamic
+this allows is storing credentials in configuration, and users with just access
+can use your commands that use those credentials, but aren&amp;rsquo;t able to see the
+credential themselves.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;However, if there is a way to display the environment in your command, those
+credentials will be plainly visible. Use at your own risk.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;setting-environment-variables&#34;&gt;Setting environment variables&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at the &lt;code&gt;:env&lt;/code&gt; meta command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io netpoll:env --help
+Manage command environment
+
+Usage:
+  demo :config [command]
+
+Available Commands:
+  set         Manage command environment
+  unset       Manage command environment
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What this help is not telling you is that running &lt;code&gt;:env&lt;/code&gt; without &lt;code&gt;--help&lt;/code&gt; will
+list current configuration values. However if you do that now, there will be no
+output since there is no configuration. Let&amp;rsquo;s set configuration on &lt;code&gt;netpoll&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Configuration is exposed to commands as environment variables, so you can
+usually just think of &lt;code&gt;:config&lt;/code&gt; as managing environment variables. If you look
+back, our &lt;code&gt;netpoll&lt;/code&gt; script actually uses a variable if set called &lt;code&gt;TIMEOUT&lt;/code&gt;,
+which defaults to &lt;code&gt;10&lt;/code&gt;. We can change that value by setting &lt;code&gt;TIMEOUT&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io netpoll:env set TIMEOUT=30
+Config updated.
+$ ssh alpha.cmd.io netpoll:env
+TIMEOUT=30
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now if you use &lt;code&gt;netpoll&lt;/code&gt; against a port that&amp;rsquo;s not accepting connections, it&amp;rsquo;s
+going to loop 30 times instead of 10. This will apply to any user that has
+access to this command.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Run API</title>
+      <link>https://www.cmd.io/guide/api/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/api/</guid>
+      <description>
+
+&lt;p&gt;You can run commands without SSH as well. The Run API gives you an HTTP and
+WebSocket API.&lt;/p&gt;
+
+&lt;h2 id=&#34;authentication&#34;&gt;Authentication&lt;/h2&gt;
+
+&lt;p&gt;Since we can&amp;rsquo;t use your SSH key easily for HTTP authentication, it&amp;rsquo;s best to use
+tokens. You can also use your GitHub username and password via Basic Auth in
+development, as we ensure the connection uses TLS. However this should never be
+used in production integrations.&lt;/p&gt;
+
+&lt;h2 id=&#34;tokens&#34;&gt;Tokens&lt;/h2&gt;
+
+&lt;p&gt;The builtin command &lt;code&gt;cmd-tokens&lt;/code&gt; has a number of commands for managing access
+tokens that you can give access to like a regular user.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-tokens
+Usage:
+  ssh &amp;lt;user&amp;gt;@cmd.io cmd-tokens [command]
+
+Available Commands:
+  ls          List tokens
+  new         Create a token
+  rm          Delete a token
+
+Additional help topics:
+
+Use &amp;quot;[command] --help&amp;quot; for help about a meta command.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Creating a token will generate a UUID based token:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io cmd-tokens new
+Token created: 84e67956-0ec3-4e49-a588-8788719dea95
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can add this to a command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh alpha.cmd.io welcome:access add 84e67956-0ec3-4e49-a588-8788719dea95
+Access granted.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Be careful with these tokens. This token now lets anybody that has it run your
+command over SSH as well as the Run API. When using over SSH, the token is
+used as the username and no key or password is required.&lt;/p&gt;
+
+&lt;h2 id=&#34;http-api&#34;&gt;HTTP API&lt;/h2&gt;
+
+&lt;p&gt;Now that you have a token you can use the run API endpoint:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://alpha.cmd.io/run/&amp;lt;user&amp;gt;/&amp;lt;command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;user&lt;/code&gt; path part is the owner of the command, in this case, your username.
+Performing a &lt;code&gt;GET&lt;/code&gt; request with the token will capture all the output (combined
+&lt;code&gt;STDOUT&lt;/code&gt; and &lt;code&gt;STDERR&lt;/code&gt;) and return it in the response:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl https://84e67956-0ec3-4e49-a588-8788719dea95@alpha.cmd.io/run/progrium/welcome
+
+Hello! This is a cmd.io command. All it does is display this message.
+However, cmd.io commands can do lots more. They can pretty much do
+anything you can do in a Docker container, except for long-running
+processes like daemons.
+
+You can install cmd.io commands from a number of sources, including
+anything off Docker Hub. Once you have a command installed, you can
+configure it and share access to it. Anybody that has access to your
+command can run it from anywhere they have an SSH client.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With the query parameter &lt;code&gt;?stream=1&lt;/code&gt;, the output will be streamed in chunked
+transfer encoding. There is no support for &lt;code&gt;STDIN&lt;/code&gt; or separate &lt;code&gt;STDOUT&lt;/code&gt; and &lt;code&gt;STDERR&lt;/code&gt;
+output via this API.&lt;/p&gt;
+
+&lt;h2 id=&#34;websocket-api&#34;&gt;WebSocket API&lt;/h2&gt;
+
+&lt;p&gt;The same endpoint can be upgraded to a WebSocket connection. Output will
+be streamed back as text.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Advanced</title>
+      <link>https://www.cmd.io/guide/advanced/</link>
+      <pubDate>Tue, 31 Jan 2017 18:00:00 -0600</pubDate>
+      
+      <guid>https://www.cmd.io/guide/advanced/</guid>
+      <description>
+
+&lt;h2 id=&#34;handling-git-push&#34;&gt;Handling &lt;code&gt;git push&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;There are a number of patterns and recipes to cover elsewhere in this wiki, but
+I&amp;rsquo;m going to share this one here. You can use Cmd.io commands over SSH as Git
+remote endpoints to implement and react to &lt;code&gt;git push&lt;/code&gt; from your repositories.
+Specifically, you can use one command for Git remotes: &lt;code&gt;git-receive-pack&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You see, all that happens when you &lt;code&gt;git push&lt;/code&gt; to an SSH remote like
+&lt;code&gt;git@github.com:gliderlabs/cmd.git&lt;/code&gt; is it translates to the SSH command &lt;code&gt;ssh
+git@github.com git-receive-pack &#39;gliderlabs/cmd.git&#39;&lt;/code&gt;. This opens a session to
+&lt;code&gt;github.com&lt;/code&gt; and runs the command &lt;code&gt;git-receive-pack&lt;/code&gt; with the repo path
+argument. The actual &lt;code&gt;git-receive-pack&lt;/code&gt; command then reads packed Git data over
+STDIN and applies it to the bare repository on the filesystem that was provided
+as an argument.&lt;/p&gt;
+
+&lt;p&gt;What Heroku and later &lt;a href=&#34;https://github.com/progrium/gitreceive&#34;&gt;gitreceive&lt;/a&gt;,
+Dokku, Flynn, etc all do in some form effectively is wrap &lt;code&gt;git-receive-pack&lt;/code&gt; and
+install a pre-receive hook into the repository (perhaps created on the fly) that
+does some task. Git is designed to display the output of that hook back to the
+user during the push, so from that hook script you can &lt;code&gt;git archive&lt;/code&gt; to get a
+tar of what was pushed and do whatever you want with it.&lt;/p&gt;
+
+&lt;p&gt;Currently, you can do this with Cmd.io by creating a command named
+&lt;code&gt;git-receive-pack&lt;/code&gt;, which will handle all Git pushes to Cmd.io that authenticate
+with your username. Cmd.io is doing nothing special to make this work, but now
+you need a command that will properly handle the push.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example to get you started. It involves three files: &lt;code&gt;Dockerfile&lt;/code&gt;,
+&lt;code&gt;git-receive&lt;/code&gt;, and &lt;code&gt;pre-receive&lt;/code&gt;. Remember the last two need to have &lt;code&gt;chmod +x&lt;/code&gt;
+run on them.&lt;/p&gt;
+
+&lt;h4 id=&#34;dockerfile&#34;&gt;Dockerfile&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM alpine:3.4
+RUN apk add --update --no-cache git sed bash
+COPY ./git-receive /bin/git-receive
+COPY ./pre-receive /hooks/
+ENTRYPOINT [&amp;quot;/bin/git-receive&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that anything your &lt;code&gt;pre-receive&lt;/code&gt; script is going to use also needs to be
+installed in this Dockerfile.&lt;/p&gt;
+
+&lt;h4 id=&#34;git-receive&#34;&gt;git-receive&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+repo=&amp;quot;$1&amp;quot;
+if [[ &amp;quot;$repo&amp;quot; != /* ]]; then
+  repo=&amp;quot;/$repo&amp;quot;
+fi
+git init --quiet --bare &amp;quot;$repo&amp;quot;
+cp /hooks/pre-receive $repo/hooks
+git-shell -c &amp;quot;git-receive-pack &#39;$repo&#39;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This normalizes the repository argument, creates a bare repo in that location,
+installs &lt;code&gt;pre-receive&lt;/code&gt; as a hook for that repository, and performs the actual
+&lt;code&gt;git-receive-pack&lt;/code&gt;. This will then trigger &lt;code&gt;pre-receive&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;pre-receive&#34;&gt;pre-receive&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+main() {
+  # reads git push header data into variables
+  read old new ref
+
+  # use archive to tarpipe pushed branch files to a working directory
+  git archive &amp;quot;$new&amp;quot; | (cd /tmp &amp;amp;&amp;amp; tar -xpf -)
+
+  # go to that directory
+  cd /tmp
+
+  # do something with the files!
+  # exit non-zero and the push will fail.
+}
+
+delete-remote-prefix() {
+  # this removes &amp;quot;remote: &amp;quot; that git prefixes hook output with client side
+  sed -u &amp;quot;s/^/&amp;quot;$&#39;\e[1G&#39;&amp;quot;/&amp;quot;
+}
+
+main | delete-remote-prefix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is just a template but from here you could deploy, do builds, run checks,
+or something more creative.&lt;/p&gt;
+
+&lt;h4 id=&#34;git-remote&#34;&gt;git remote&lt;/h4&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve made a command from the above and installed it as
+&lt;code&gt;git-receive-pack&lt;/code&gt;, you can add a remote to the repositories you want to push
+from like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add cmd ssh://progrium@cmd.io/repo/path
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The name of the remote can be anything you like, here it&amp;rsquo;s &lt;code&gt;cmd&lt;/code&gt;. You can also
+drop the username if you were previously. The repo path can be anything as well,
+perhaps use it to determine what to do in your pre-receive script.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, &lt;code&gt;git-receive-pack&lt;/code&gt; is not sharable. Perhaps in the near future
+there will be more integrated support in Cmd.io for this pattern.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

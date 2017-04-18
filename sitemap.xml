@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://www.cmd.io/guide/overview/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/setup/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/builtins/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/create/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/authoring/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/ls/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/meta/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/delete/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/api/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/edit/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/advanced/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/env/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/access/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/admins/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/tokens/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/cli/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.cmd.io/guide/</loc>
+    <lastmod>2017-01-31T18:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

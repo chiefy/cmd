@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Overview &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Overview</h1>
+	
+	<p>Cmd.io is a service that remotely runs commands and scripts. The primary
+interface to Cmd.io is SSH, meaning you can use Cmd.io commands from any host
+with an SSH client. A couple of use cases for Cmd.io include:</p>
+
+<ul>
+<li><strong>CLI utilities as a service.</strong> Example, bring <code>jq</code> wherever you go, without installing it.</li>
+<li><strong>Avoid installing big CLI programs.</strong> Example, <code>latex</code> is huge and difficult to build but used infrequently.</li>
+<li><strong>Scripts you can use from anywhere.</strong> Trigger and orchestrate other systems using any language.</li>
+<li><strong>Share and control access to automation.</strong> Build tools for your team or Rickroll your friends.</li>
+</ul>
+
+<p>Cmd.io commands can run any x86 64-bit program in an Linux Docker container.
+However, it&rsquo;s designed for commands and scripts as opposed to long-running
+daemons. In fact, commands can only run for a limited time before they timeout.
+So Cmd.io is also not suitable for replacing your shell. Kudos for such a clever
+idea, though.</p>
+
+<p>Commands are unable to listen on routable ports, which is not common with most
+commands anyway. In the rare cases you need to, such as debugging with netcat,
+consider using a tool like <a href="https://ngrok.com/">ngrok</a>.</p>
+
+<p>Another important constraint of commands is that they are stateless. Besides
+configured environment variables, nothing persists across command runs. If the
+command makes a file, it will not be there the next time you run it. Utilities
+that expect files on the filesystem will need to be wrapped so they can receive
+the file(s) via STDIN.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

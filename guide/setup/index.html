@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Setup &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Setup</h1>
+	
+	
+
+<h2 id="user-notes">User Notes</h2>
+
+<p>We&rsquo;d love it if you took notes about your experience getting started and then
+using Cmd.io. You can then share on
+<a href="https://github.com/gliderlabs/cmd/wiki/UserNotes">UserNotes</a> and we can use
+them as living documents to improve the experience. Also, if something is wrong
+on this page or any other, feel free to edit this wiki!</p>
+
+<h2 id="setup">Setup</h2>
+
+<blockquote>
+<p>This document is currently for the alpha release channel (alpha.cmd.io) &hellip;
+any accidental references to the cmd.io domain should be read as alpha.cmd.io</p>
+</blockquote>
+
+<p>Cmd.io uses your GitHub user for authentication. It also relies on the public
+keys stored with your GitHub account. If you haven&rsquo;t uploaded a public key to
+GitHub, you can easily add one in Settings under <a href="https://github.com/settings/keys">SSH and GPG
+keys</a>.</p>
+
+<p>Now you can connect to Cmd.io over SSH:</p>
+
+<pre><code>$ ssh progrium@alpha.cmd.io
+Usage:
+  ssh &lt;user&gt;@cmd.io [command]
+
+Available Commands:
+  cmd-add             Install a command
+  cmd-ls              List installed commands
+  cmd-rm              Uninstall a command
+
+Use &quot;[command] --help&quot; for help about a meta command.
+</code></pre>
+
+<p>If you&rsquo;re using a local user with the same username as your GitHub username, SSH
+will use it by default. If not, you can also avoid specifying a username with
+some configuration added to your <code>~/.ssh/config</code> file:</p>
+
+<pre><code>Host alpha.cmd.io
+    User progrium
+</code></pre>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

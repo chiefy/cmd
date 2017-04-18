@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Run API &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Run API</h1>
+	
+	
+
+<p>You can run commands without SSH as well. The Run API gives you an HTTP and
+WebSocket API.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>Since we can&rsquo;t use your SSH key easily for HTTP authentication, it&rsquo;s best to use
+tokens. You can also use your GitHub username and password via Basic Auth in
+development, as we ensure the connection uses TLS. However this should never be
+used in production integrations.</p>
+
+<h2 id="tokens">Tokens</h2>
+
+<p>The builtin command <code>cmd-tokens</code> has a number of commands for managing access
+tokens that you can give access to like a regular user.</p>
+
+<pre><code>$ ssh alpha.cmd.io cmd-tokens
+Usage:
+  ssh &lt;user&gt;@cmd.io cmd-tokens [command]
+
+Available Commands:
+  ls          List tokens
+  new         Create a token
+  rm          Delete a token
+
+Additional help topics:
+
+Use &quot;[command] --help&quot; for help about a meta command.
+</code></pre>
+
+<p>Creating a token will generate a UUID based token:</p>
+
+<pre><code>$ ssh alpha.cmd.io cmd-tokens new
+Token created: 84e67956-0ec3-4e49-a588-8788719dea95
+</code></pre>
+
+<p>Now we can add this to a command:</p>
+
+<pre><code>$ ssh alpha.cmd.io welcome:access add 84e67956-0ec3-4e49-a588-8788719dea95
+Access granted.
+</code></pre>
+
+<p>Be careful with these tokens. This token now lets anybody that has it run your
+command over SSH as well as the Run API. When using over SSH, the token is
+used as the username and no key or password is required.</p>
+
+<h2 id="http-api">HTTP API</h2>
+
+<p>Now that you have a token you can use the run API endpoint:</p>
+
+<pre><code>https://alpha.cmd.io/run/&lt;user&gt;/&lt;command&gt;
+</code></pre>
+
+<p>The <code>user</code> path part is the owner of the command, in this case, your username.
+Performing a <code>GET</code> request with the token will capture all the output (combined
+<code>STDOUT</code> and <code>STDERR</code>) and return it in the response:</p>
+
+<pre><code>$ curl https://84e67956-0ec3-4e49-a588-8788719dea95@alpha.cmd.io/run/progrium/welcome
+
+Hello! This is a cmd.io command. All it does is display this message.
+However, cmd.io commands can do lots more. They can pretty much do
+anything you can do in a Docker container, except for long-running
+processes like daemons.
+
+You can install cmd.io commands from a number of sources, including
+anything off Docker Hub. Once you have a command installed, you can
+configure it and share access to it. Anybody that has access to your
+command can run it from anywhere they have an SSH client.
+
+</code></pre>
+
+<p>With the query parameter <code>?stream=1</code>, the output will be streamed in chunked
+transfer encoding. There is no support for <code>STDIN</code> or separate <code>STDOUT</code> and <code>STDERR</code>
+output via this API.</p>
+
+<h2 id="websocket-api">WebSocket API</h2>
+
+<p>The same endpoint can be upgraded to a WebSocket connection. Output will
+be streamed back as text.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>

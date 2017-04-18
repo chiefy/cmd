@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head lang="en-us">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+	<meta name="description" content="Shell commands in the cloud.">
+	<meta name="generator" content="Hugo 0.18" />
+
+	<title>Meta Commands &mdash; Cmd Documentation</title>
+
+	<link rel="stylesheet" href="https://www.cmd.io//semantic/semantic.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/alabaster.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.cmd.io/css/highlight.css" type="text/css" />
+
+	
+
+	<link rel="shortcut icon" href="https://www.cmd.io/favicon.ico" type="image/x-icon"/>
+</head>
+
+
+	<body role="document">
+		<div class="ui container">
+			<div class="ui centered grid">
+				<div role="navigation" aria-label="main navigation" class="three wide column">
+					
+
+
+
+				</div>
+
+				<div class="body ten wide column" role="main">
+					
+	<h1>Meta Commands</h1>
+	
+	
+
+<p>Some of the real power in Cmd.io comes from what you can do with meta commands.
+Meta command are commands that operate on a command. They look like
+<code>&lt;command&gt;:&lt;metacommand&gt;</code>. Let&rsquo;s use the <code>:help</code> meta command on our <code>netpoll</code>
+command from before to see what we can do:</p>
+
+<pre><code>$ ssh alpha.cmd.io netpoll:help
+Usage:
+  ssh &lt;user&gt;@cmd.io netpoll:[command]
+
+Available Commands:
+  :access     Manage command access
+  :admins     Manage command admins
+  :env        Manage command environment
+
+Use &quot;[command] --help&quot; for help about a meta command.
+</code></pre>
+
+<p>You can explore <code>:access</code> and <code>:admins</code> on your own. In short, access lets you
+share a command with others by adding and removing GitHub usernames. They can
+run it prefixed with your username and a slash. For example, if I shared
+<code>netpoll</code> with you, you could run it with <code>ssh cmd.io progrium/netpoll</code>. Access
+also lets you make a command public, letting any user run it, or make it private
+again.</p>
+
+<p>The difference between access and admins is currently that admins have access to
+these meta commands just like you. Users with access don&rsquo;t. A useful dynamic
+this allows is storing credentials in configuration, and users with just access
+can use your commands that use those credentials, but aren&rsquo;t able to see the
+credential themselves.</p>
+
+<blockquote>
+<p><strong>However, if there is a way to display the environment in your command, those
+credentials will be plainly visible. Use at your own risk.</strong></p>
+</blockquote>
+
+<h3 id="setting-environment-variables">Setting environment variables</h3>
+
+<p>Let&rsquo;s look at the <code>:env</code> meta command:</p>
+
+<pre><code>$ ssh alpha.cmd.io netpoll:env --help
+Manage command environment
+
+Usage:
+  demo :config [command]
+
+Available Commands:
+  set         Manage command environment
+  unset       Manage command environment
+
+Use &quot;[command] --help&quot; for help about a meta command.
+
+</code></pre>
+
+<p>What this help is not telling you is that running <code>:env</code> without <code>--help</code> will
+list current configuration values. However if you do that now, there will be no
+output since there is no configuration. Let&rsquo;s set configuration on <code>netpoll</code>.</p>
+
+<p>Configuration is exposed to commands as environment variables, so you can
+usually just think of <code>:config</code> as managing environment variables. If you look
+back, our <code>netpoll</code> script actually uses a variable if set called <code>TIMEOUT</code>,
+which defaults to <code>10</code>. We can change that value by setting <code>TIMEOUT</code>:</p>
+
+<pre><code>$ ssh alpha.cmd.io netpoll:env set TIMEOUT=30
+Config updated.
+$ ssh alpha.cmd.io netpoll:env
+TIMEOUT=30
+</code></pre>
+
+<p>Now if you use <code>netpoll</code> against a port that&rsquo;s not accepting connections, it&rsquo;s
+going to loop 30 times instead of 10. This will apply to any user that has
+access to this command.</p>
+
+
+				</div>
+
+			</div>
+
+
+			
+
+			
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+			<script>hljs.initHighlightingOnLoad();</script>
+			
+
+			
+		</div>
+	</body>
+</html>
