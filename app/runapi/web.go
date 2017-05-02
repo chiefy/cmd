@@ -2,6 +2,7 @@ package runapi
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -41,20 +42,18 @@ func parseArgs(r *http.Request) (string, string, []string) {
 		// not enough parts
 		return "", "", []string{}
 	}
-	if r.URL.Query().Get("args") != "" {
-		// args in query param
-		return parts[0], parts[1], strings.Split(r.URL.Query().Get("args"), " ")
-	}
-	if len(parts) > 2 {
-		if strings.Contains(parts[2], "/") {
-			// args via path parts
-			args := strings.Split(strings.Replace(parts[2], "+", " ", -1), "/")
-			return parts[0], parts[1], args
+	if ok := r.ParseForm(); ok == nil {
+		values := map[string]string{}
+		for k, v := range r.Form {
+			values[k] = v[0]
 		}
-		// args as single path part
-		return parts[0], parts[1], strings.Split(parts[2], "+")
+		j, err := json.Marshal(values)
+		if err != nil {
+			return parts[0], parts[1], []string{}
+		}
+		s := string(j[:])
+		return parts[0], parts[1], []string{s}
 	}
-	// no args
 	return parts[0], parts[1], []string{}
 }
 
